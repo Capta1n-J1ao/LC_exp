@@ -87,11 +87,11 @@ public class lc973 {
         this.points = points;
         int pLen = points.length;
         int start = 0, end = pLen - 1, cur = -1;
-        while (cur != K - 1){
+        while (cur != K){
             cur = patition(start, end);
-            if(cur > K - 1){
+            if(cur > K){
                 end = cur - 1;
-            }else if(cur < K -1){
+            }else if(cur < K){
                 start = cur + 1;
             }else break;
         }
@@ -99,22 +99,15 @@ public class lc973 {
     }
 
     private int patition(int start, int end){
-        int randomIndex = start + (int)(Math.random() * (end - start + 1));
-//        if(distance(randomIndex) > distance(hi)) swap(randomIndex, hi);
-        swap(randomIndex, end);
-//        在交换了randomIndex和hi以后，排序的范围要缩小一位，排除最后一位
-        int lo = start, hi = end - 1;
+        if(start == end) return start;
+        int lo = start, hi = end, pivot = distance(start);
         while (lo < hi){
-            while (lo < hi && distance(lo) <= distance(randomIndex)) lo++;
-            while (lo < hi && distance(hi) > distance(randomIndex)) hi--;
+            while (lo < hi && distance(lo) <= pivot) lo++;
+            while (lo < hi && distance(hi) > pivot) hi--;
             swap(lo, hi);
         }
-        if(distance(lo) > distance(end)){
-            swap(lo, end);
-            return lo;
-        }
-//        这个返回是防止一些极限情况，比如视频里面说到的那种
-        return end;
+        swap(lo, start);
+        return lo;
     }
 
     private void swap(int start, int end){
