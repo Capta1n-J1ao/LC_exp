@@ -5,6 +5,8 @@ package amazon;
 
 但是见到kth的题目，第一反应还是要使用priorityqueue来解决，所以有了方法二：
 https://leetcode-cn.com/problems/merge-k-sorted-lists/solution/duo-tu-yan-shi-23-he-bing-kge-pai-xu-lian-biao-by-/
+
+可以先做lc21然后再做这题，这样比较进阶。是同一个类型
 * */
 
 import java.util.Arrays;
