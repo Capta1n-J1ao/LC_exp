@@ -29,10 +29,10 @@ public class lc212 {
     }
 
     private void DFS(String word, int index, int row1, int col1, boolean[][] visited){
-        if(row1 < 0 || row1 >= row || col1 < 0 || col1 >= col || visited[row1][col1]) return;
+        
         char[] wChar = word.toCharArray();
         int wLen = wChar.length;
-        if(index >= wLen) return;
+        if(row1 < 0 || row1 >= row || col1 < 0 || col1 >= col || visited[row1][col1] || index >= wLen) return;
         if(board[row1][col1] == wChar[index] && !visited[row1][col1]){
             index++;
             if(index == wLen && !hashSet.contains(word)) {
@@ -52,7 +52,8 @@ public class lc212 {
             visited[row1][col1] = false;
         }
     }
-
+    
+    
     public static void main(String[] args) {
 //        char[][] test = {{'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'}};
 //        String[] test1 = {"oath","pea"};
