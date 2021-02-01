@@ -29,6 +29,18 @@ public class lc212 {
     }
 
     private void DFS(String word, int index, int row1, int col1, boolean[][] visited){
+        if(index == wLen && !hashSet.contains(word)) {
+                hashSet.add(word);
+                res.add(word);
+                return;
+        }
+        char[] wChar = word.toCharArray();
+        int wLen = wChar.length;
+        if(!visited[row1][col1]){
+            visited[row1][col1] = true;
+        }
+        
+        
         if(row1 < 0 || row1 >= row || col1 < 0 || col1 >= col || visited[row1][col1]) return;
         char[] wChar = word.toCharArray();
         int wLen = wChar.length;
