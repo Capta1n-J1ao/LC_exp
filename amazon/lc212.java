@@ -1,5 +1,12 @@
 package amazon;
 
+/*
+这道题是目前搜索里面最难的题目，没有之一，个人认为需要留一个小时做本题才比较合适，建议做此题前先做一下lc46找找感觉
+
+这道题目需要结合DFS和回溯才能够做出来，一开始只用了DFS，但是会有test case过不去，所以想到还要用回溯。
+但是回溯的时候还要结合DFS，所以debug了很久
+* */
+
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -21,15 +28,14 @@ public class lc212 {
             for(int i = 0; i < row; i++){
                 for(int k = 0; k < col; k++){
                     boolean[][] visited = new boolean[row][col];
-                    if(!hashSet.contains(word)) DFS(word, 0, i, k, visited);
+                    if(!hashSet.contains(word)) BackTracking(word, 0, i, k, visited);
                 }
             }
         }
         return res;
     }
 
-    private void DFS(String word, int index, int row1, int col1, boolean[][] visited){
-        
+    private void BackTracking(String word, int index, int row1, int col1, boolean[][] visited){
         char[] wChar = word.toCharArray();
         int wLen = wChar.length;
         if(row1 < 0 || row1 >= row || col1 < 0 || col1 >= col || visited[row1][col1] || index >= wLen) return;
@@ -46,14 +52,13 @@ public class lc212 {
                 int x = row1 + dir[0];
                 int y = col1 + dir[1];
                 if(x < 0 || x >= row || y < 0 || y >= col || visited[x][y]) continue;
-                DFS(word, index, x, y, visited);
-                
+                BackTracking(word, index, x, y, visited);
+
             }
             visited[row1][col1] = false;
         }
     }
-    
-    
+
     public static void main(String[] args) {
 //        char[][] test = {{'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'}};
 //        String[] test1 = {"oath","pea"};
