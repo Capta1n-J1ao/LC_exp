@@ -45,6 +45,7 @@ public class lc212 {
 //    }
 
 //    方法二：带预处理，效率高很多，原理就是先遍历board，把每个格子里面的字母进行排序和编号，
+//    然后对照words里面每个word的首字母进行寻找，
 //    这样可以省掉三个for循环,很巧妙，其实速度也已经和Trie差不多了
     public List<String> findWords(char[][] board, String[] words) {
         this.board = board;
