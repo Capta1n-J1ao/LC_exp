@@ -29,24 +29,27 @@ public class lc212 {
     }
 
     private void DFS(String word, int index, int row1, int col1, boolean[][] visited){
-        if(index == wLen && !hashSet.contains(word)) {
+        if(row1 < 0 || row1 >= row || col1 < 0 || col1 >= col || visited[row1][col1]) return;
+        char[] wChar = word.toCharArray();
+        int wLen = wChar.length;
+        if(index >= wLen) return;
+        if(board[row1][col1] == wChar[index] && !visited[row1][col1]){
+            index++;
+            if(index == wLen && !hashSet.contains(word)) {
                 hashSet.add(word);
                 res.add(word);
                 return;
-        }
-        char[] wChar = word.toCharArray();
-        int wLen = wChar.length;
-        if(row1 < 0 || row1 >= row || col1 < 0 || col1 >= col || visited[row1][col1]) return;
-        visited[row1][col1] = true;
-        for(int[] dir : dirs){
+            }
+            visited[row1][col1] = true;
+//            System.out.println(visited[2][0]);
+            for(int[] dir : dirs){
                 int x = row1 + dir[0];
                 int y = col1 + dir[1];
-               
+                if(x < 0 || x >= row || y < 0 || y >= col || visited[x][y]) continue;
                 DFS(word, index, x, y, visited);
                 
-        }
-        visited[row1][col1] = false;
-       
+            }
+            visited[row1][col1] = false;
         }
     }
 
