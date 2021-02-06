@@ -126,7 +126,7 @@ public class lc126 {
 //    }
 
 
-//  方法二：结合了上面的方法和liweiwei的方法，其实两个办法最主要的差别就是在于找爹，
+//  方法二：在方法一的基础上看了liweiwei的思路，其实两个办法最主要的差别就是在于找爹，
 //  就是对应爹和儿子的关系，把它做成一个hashmap一一对应，然后通过对这个hashMap进行回溯来得到所有答案
     private List<List<String>> res = new LinkedList<>();
     private HashMap<String, HashSet<String>> parents = new HashMap<>();
@@ -159,6 +159,7 @@ public class lc126 {
                                 if(!temp_parents.containsKey(sChange)){
                                     queue.add(sChange);
                                 }
+//                                看方法一的注释
                                 temp_parents.computeIfAbsent(sChange, key -> new HashSet<>()).add(str);
                             }
                         }
