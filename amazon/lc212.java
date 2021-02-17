@@ -15,8 +15,8 @@ https://leetcode-cn.com/problems/word-search-ii/solution/yu-chu-li-shen-du-you-x
 然后就是使用最多的用Trie的方法，这个题解和我的几乎一模一样，我也是在他帮助下才debug好的，但是其实效率并不高，改成数组会有改善，
 但是还是不好，权当复习Trie，而且由于这道题目的原因，对Trie还做了些小改动，方便代码：
 https://leetcode-cn.com/problems/word-search-ii/solution/java-zi-dian-shu-jie-fa-by-heidi-1/
-下面这个是剪枝版本，快挺多，但是和前两个方法还是有差距，有空可以搞搞：
-https://leetcode-cn.com/problems/word-search-ii/submissions/
+下面这个是剪枝版本，快挺多，但是和前两个方法还是有差距，有空可以搞搞,这次没搞出来，差一点点：
+https://leetcode-cn.com/problems/word-search-ii/solution/java-jian-ji-ming-liao-qian-zhui-shu-dfssi-xiang-b/
 
 综上所述，根据效率来说是 方法二 > 方法一 > 方法三
 * */

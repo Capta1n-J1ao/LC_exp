@@ -5,17 +5,13 @@ package amazon;
 https://www.bilibili.com/video/BV16K4y1j7hX?t=4
 然后是这个视频的源码，我的第一编代码几乎和他一样：
 https://turingplanet.org/2020/11/26/126_word_ladder_ii/
-
 搞懂了上面那个以后再看liweiwei的优化版本，其实其实两个办法最主要的差别就是在于找爹，
 就是对应爹和儿子的关系，把它做成一个hashmap一一对应，然后通过对这个hashMap进行回溯来得到所有答案
 https://leetcode-cn.com/problems/word-ladder-ii/solution/yan-du-you-xian-bian-li-shuang-xiang-yan-du-you--2/
-
 经过总结来看的话，两个方法的区别就是找爹效率的不同，
 方法一是先要把所有的单词的邻居通过HashMap来一一对应，然后在BFS里面用这个HashMap来找父子关系，
 这样相当于用两个HashMap来找爹，并且当中有很多重叠操作，造成了极大的浪费
-
 方法二的找爹方法和lc极像，就是用换字符串的方式，这样可以最大程度节省效率
-
 其实这两个方法就这两个代码不一样，其他都一样，但是效率差十倍以上。
 * */
 
@@ -126,7 +122,7 @@ public class lc126 {
 //    }
 
 
-//  方法二：在方法一的基础上看了liweiwei的思路，其实两个办法最主要的差别就是在于找爹，
+    //  方法二：在方法一的基础上看了liweiwei的思路，其实两个办法最主要的差别就是在于找爹，
 //  就是对应爹和儿子的关系，把它做成一个hashmap一一对应，然后通过对这个hashMap进行回溯来得到所有答案
     private List<List<String>> res = new LinkedList<>();
     private HashMap<String, HashSet<String>> parents = new HashMap<>();

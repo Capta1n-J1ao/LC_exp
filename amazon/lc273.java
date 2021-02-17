@@ -6,13 +6,12 @@ package amazon;
 这道题目主要难在思路，实现的话还是挺容易的，还有就是要熟悉string的两个命令
 1. string.trim
 2. append其实是可以连续使用的，比如.append().append()...可以无限接下去
-
 代码的话就参考我写的这个，我参考的leetcode上面的那个也没注释，但是也没必要注释，都看得懂
 * */
 
 public class lc273 {
     String[] one2Twenty = {"Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen","Twenty"};
-//    String[] mid = {"Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
+    //    String[] mid = {"Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"};
     String[] Tens = {"","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"};
     public String numberToWords(int num) {
         if(num == 0) return one2Twenty[0];

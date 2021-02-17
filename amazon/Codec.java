@@ -1,9 +1,10 @@
 package amazon;
 
 /*
-lc297
+lc297、lc477是一道题目
 题目可能会有歧义，那就是serialize里面的String是什么格式？ 可以自定义，不强制要求，但是要考虑到后面deserialize
 
+题解：
 https://leetcode-cn.com/problems/serialize-and-deserialize-binary-tree/solution/bfshe-dfsliang-chong-fang-shi-jie-jue-by-sdwwld-3/
 * */
 

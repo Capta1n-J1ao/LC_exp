@@ -2,6 +2,7 @@ package amazon;
 
 /*
 lc380
+
 自己做的时候其实已经基本想出来使用hashmap和list了，以下是详细思路：
 https://leetcode-cn.com/problems/insert-delete-getrandom-o1/solution/li-yong-hashmaphe-arraylistshi-xian-by-1-12-14-18/
 
