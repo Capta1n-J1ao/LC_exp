@@ -11,84 +11,87 @@ import java.util.HashMap;
 
 public class LRUCache {
     public class Node{
-        int key, val;
-        Node pre, next;
-        private Node(int k, int v){
-            this.key = k;
-            this.val = v;
+        int key;
+        int value;
+//        应该写在这个类里面，而不是doubleList
+        Node next, pre;
+        public Node(int key, int value){
+            this.key = key;
+            this.value = value;
         }
     }
 
-    private class doubleList{
+    public class doubleList{
         Node head = new Node(0,0);
         Node tail = new Node(0,0);
         int size;
-        private doubleList(){
+        public doubleList(){
             head.next = tail;
             tail.pre = head;
             size = 0;
         }
 
-        private void remove(Node delNode){
-            Node temp1 = delNode.pre;
-            Node temp2 = delNode.next;
-//            注意这里是否会有问题
-            temp1.next = temp2;
-            temp2.pre = temp1;
-            size--;
-        }
-
-        private Node removeLast(){
-            Node last = tail.pre;
-            remove(last);
-            return last;
-        }
-
-        private void addFirst(Node newHead){
+        public void addFirst(Node newHead){
             Node temp = head.next;
-            newHead.pre = head;
             head.next = newHead;
+            newHead.pre = head;
             newHead.next = temp;
             temp.pre = newHead;
             size++;
         }
 
+        public Node pollLast(){
+            Node temp = tail.pre;
+            remove(temp);
+            return temp;
+        }
+
+        public void remove(Node removeNode){
+            Node rmpre = removeNode.pre;
+            Node rmnext = removeNode.next;
+            rmpre.next = rmnext;
+            rmnext.pre = rmpre;
+            size--;
+        }
         private int size(){
             return size;
         }
     }
 
-
     private int capacity;
     private HashMap<Integer, Node> hashMap;
-    private doubleList doubleLinkedList;
+    private doubleList dbList;
     public LRUCache(int capacity) {
-        hashMap = new HashMap<>();
-        doubleLinkedList = new doubleList();
         this.capacity = capacity;
+        hashMap = new HashMap<>();
+        dbList = new doubleList();
     }
 
     public int get(int key) {
         if(!hashMap.containsKey(key)) return -1;
-        int val = hashMap.get(key).val;
-        put(key, val);
-        return val;
+        Node getNode = hashMap.get(key);
+        put(key, getNode.value);
+        return getNode.value;
     }
 
+//    整个数据结构这个函数最容易错，排查了半小时
     public void put(int key, int value) {
-        Node node = new Node(key, value);
+        Node putNode = new Node(key, value);
         if(!hashMap.containsKey(key)){
-            if(capacity <= doubleLinkedList.size()){
-                Node temp = doubleLinkedList.removeLast();
-//                下面这句一开始忘了，要记住是对应的关系
-                hashMap.remove(temp.key);
+            if(dbList.size >= capacity){
+                Node lastNode = dbList.pollLast();
+//                这句也容易错
+                hashMap.remove(lastNode.key);
             }
-            hashMap.put(key, node);
-            doubleLinkedList.addFirst(node);
+            dbList.addFirst(putNode);
+            hashMap.put(key, putNode);
         }else {
-            doubleLinkedList.remove(hashMap.get(key));
-            doubleLinkedList.addFirst(node);
-            hashMap.put(key, node);
+//            查了好久才找到
+//            dbList.remove(putNode);
+            dbList.remove(hashMap.get(key));
+            dbList.addFirst(putNode);
+//            题目里面put的作用第一句话就说明了下面的情况
+            hashMap.put(key, putNode);
         }
     }
 
