@@ -107,24 +107,42 @@ public class lc973 {
         return Arrays.copyOfRange(points, 0, K);
     }
 
-    private int patition(int start, int end){
-//        使用end作为pivot，那么要注意while循环里面的while要以如下顺序进行遍历，
-//        否则就会出错，有点类似于二分法的mid选取，即左中位数和右中位数问题
-        int lo = start, hi = end - 1, pivot = distance(end);
+//    三刷尝试写一版随机数的,这里面的逻辑极度容易错，特别是while里面的语句
+    private int patition(int left, int right){
+        int lo = left, hi = right - 1, pivot = left  + (int)(Math.random() * (right - left + 1));
+        swap(pivot, right);
         while (lo < hi){
-//            以下两句话的顺序需要严格遵守，否则就不对，用test3debug下就知道为什么了，
-// 类似于二分法取mid问题就是因为这个原因debug了一天多
-            while (lo < hi && distance(lo) <= pivot) lo++;
-            while (lo < hi && distance(hi) > pivot) hi--;
+//            注意下面那个while是>而不是>=，还有就是由于pivot和right换了位置，所以始终都是hi,lo和right在比，别搞错！！
+            while (lo < hi && distance(lo) <=  distance(right)) lo++;
+            while (lo < hi && distance(hi) > distance(right)) hi--;
             swap(lo, hi);
         }
-//        针对corner case，视频中也提到了,而且两个版本的判断条件也不同
-        if(pivot < distance(lo)){
-            swap(lo,end);
+        if(distance(lo) > distance(right)){
+            swap(lo, right);
             return lo;
         }
-        return end;
+        return right;
     }
+
+
+//    private int patition(int start, int end){
+////        使用end作为pivot，那么要注意while循环里面的while要以如下顺序进行遍历，
+////        否则就会出错，有点类似于二分法的mid选取，即左中位数和右中位数问题
+//        int lo = start, hi = end - 1, pivot = distance(end);
+//        while (lo < hi){
+////            以下两句话的顺序需要严格遵守，否则就不对，用test3debug下就知道为什么了，
+//// 类似于二分法取mid问题就是因为这个原因debug了一天多
+//            while (lo < hi && distance(lo) <= pivot) lo++;
+//            while (lo < hi && distance(hi) > pivot) hi--;
+//            swap(lo, hi);
+//        }
+////        针对corner case，视频中也提到了,而且两个版本的判断条件也不同
+//        if(pivot < distance(lo)){
+//            swap(lo,end);
+//            return lo;
+//        }
+//        return end;
+//    }
 
 //    private int patition(int start, int end){
 ////        这句话是针对start为pivot特有的，end为pivot则不会有这个问题，用test4可验证
@@ -158,15 +176,15 @@ public class lc973 {
     }
 
     public static void main(String[] args) {
-        int[][] test = {{3,3},{5,-1},{-2,4}};
-//        int[][] test1 = {{2,2},{2,2},{2,2},{2,2},{2,2},{2,2},{1,1}};
+//        int[][] test = {{3,3},{5,-1},{-2,4}};
+        int[][] test1 = {{2,2},{2,2},{2,2},{2,2},{2,2},{2,2},{1,1}};
 //        int[][] test2 = {{-4,-7},{6,7},{-8,-5},{6,9},{-9,-4},{-9,-8},{-10,-6}};
 //        int[][] test3 = {{89, 6}, {-39, -4}, {-13, 91}, {97, -61}, {1, 7}, {-66, 69}, {-51, 68}, {82, -6}, {-21, 44}, {-58, -83}, {-40, 73}, {-88, -24}};
-        int[][] test4 = {{0,1},{1,0}};
+//        int[][] test4 = {{0,1},{1,0}};
 //        System.out.println(Arrays.toString(new lc973().kClosest(test, 2)));
-//        System.out.println(Arrays.toString(new lc973().kClosest(test1, 1)));
+        System.out.println(Arrays.toString(new lc973().kClosest(test1, 1)));
 //        System.out.println(Arrays.toString(new lc973().kClosest(test2, 6)));
 //        System.out.println(Arrays.toString(new lc973().kClosest(test3, 8)));
-        System.out.println(Arrays.toString(new lc973().kClosest(test4, 2)));
+//        System.out.println(Arrays.toString(new lc973().kClosest(test4, 2)));
     }
 }
