@@ -20,24 +20,24 @@ import java.util.Stack;
 
 public class lc42 {
 //    方法一，基于暴力法优化的dp，个人感觉有点伪dp。
-    public int trap(int[] height) {
-        int hLen = height.length;
-        int res = 0;
-        int[] leftHighest = new int[hLen];
-        int[] rightHighest = new int[hLen];
-        for(int i = 1; i < hLen; i++){
-            leftHighest[i] = Math.max(height[i - 1], leftHighest[i - 1]);
-        }
-        for(int i = hLen - 2; i > 0; i--){
-            rightHighest[i] = Math.max(height[i + 1], rightHighest[i + 1]);
-        }
-
-        for(int i = 1; i < hLen; i++){
-            int temp = Math.min(leftHighest[i], rightHighest[i]);
-            res += temp > height[i] ? (temp - height[i]) : 0;
-        }
-        return res;
-    }
+//    public int trap(int[] height) {
+//        int hLen = height.length;
+//        int res = 0;
+//        int[] leftHighest = new int[hLen];
+//        int[] rightHighest = new int[hLen];
+//        for(int i = 1; i < hLen; i++){
+//            leftHighest[i] = Math.max(height[i - 1], leftHighest[i - 1]);
+//        }
+//        for(int i = hLen - 2; i > 0; i--){
+//            rightHighest[i] = Math.max(height[i + 1], rightHighest[i + 1]);
+//        }
+//
+//        for(int i = 1; i < hLen; i++){
+//            int temp = Math.min(leftHighest[i], rightHighest[i]);
+//            res += temp > height[i] ? (temp - height[i]) : 0;
+//        }
+//        return res;
+//    }
 
 //    方法二使用的是栈，但是这个栈如果要应用在这道题目里面的话要用到一种名为单调栈的结构，
 //    相关解释如下链接：https://leetcode-cn.com/problems/trapping-rain-water/solution/dan-diao-zhan-jie-jue-jie-yu-shui-wen-ti-by-sweeti/
@@ -64,4 +64,29 @@ public class lc42 {
 //        }
 //        return res;
 //    }
+
+
+//    二刷2021/3/5, dp的解法和lc238很像。
+    public int trap(int[] height) {
+        int hLen = height.length, res = 0;
+        int[] leftHighest = new int[hLen];
+        int[] rightHighest = new int[hLen];
+        for(int i = 1; i < hLen; i++){
+            leftHighest[i] = Math.max(leftHighest[i - 1], height[i - 1]);
+        }
+        for(int i = hLen - 2; i >= 0; i--){
+            rightHighest[i] = Math.max(rightHighest[i + 1], height[i + 1]);
+        }
+
+        for(int i = 1; i < hLen - 1; i++){
+            int edge = Math.min(leftHighest[i], rightHighest[i]);
+            if(height[i] < edge) res += edge - height[i];
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        int[] test = {4,2,0,3,2,5};
+        System.out.println(new lc42().trap(test));
+    }
 }

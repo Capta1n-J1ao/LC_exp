@@ -5,6 +5,8 @@ package amazon;
 
 第一种暴力法太傻了，参考Liweiwei：
 https://leetcode-cn.com/problems/find-median-from-data-stream/solution/you-xian-dui-lie-python-dai-ma-java-dai-ma-by-liwe/
+
+写的时候注意addNum是有简便的解决办法的，要总结以下规律
 * */
 
 import java.util.ArrayList;
