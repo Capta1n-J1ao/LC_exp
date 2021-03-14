@@ -26,8 +26,12 @@ public class lc149 {
                 if(i == k) continue;
                 int[] p2 = points[k];
                 double width = p2[0] - p1[0];
-                double length = p2[1] - p1[1];
+                double height = p2[1] - p1[1];
+                double slope = (height * 1000000000) / width;
+                slopes.put(slope, slopes.getOrDefault(slope, 0) + 1);
+                res = Math.max(res, slopes.get(slope));
             }
         }
+        return res;
     }
 }
